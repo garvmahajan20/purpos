@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PURPOS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <canvas id="particleCanvas"></canvas>
+
+    <header class="navbar">
+        <h1 class="ngoname">PURPOS</h1>
+        <div class="navbuttons">
+            <button class="newvolunteer">Become a new volunteer</button>
+            <button class="login">Login</button>
+            <button id="darkmode" class="theme-btn" type="button"><img src="theme_icon.png" alt="Toggle Theme" class="theme-icon"></button>
+        </div>
+    </header>
+
+    <div class="hero-section">
+        <img src="heroimage.jpg" alt="hero image" class="hero-image">
+        <div class="hero-overlay">
+            <div class="hero-tagline">
+                <span class="tagline-word" style="--i:0">Built</span>
+                <span class="tagline-word" style="--i:1">for</span>
+                <span class="tagline-word tagline-accent" style="--i:2">Purpose.</span>
+            </div>
+            <p class="hero-sub">Connecting volunteers with causes that matter.</p>
+            <div class="hero-scroll-hint">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="ausection reveal">
+            <div class="text">
+                <h2 class="aboutus">About Purpos</h2>
+                <p class="aboutusc">
+                    Purpos was created with one simple vision — to make volunteering easier, smarter, and more
+                    meaningful. Across communities, thousands of people are willing to contribute their time, energy,
+                    and skills, while countless NGOs and social organizations are searching for dependable volunteers.
+                    Yet, many opportunities are missed because there is no simple bridge connecting the two.
+                    <br><br>
+                    Purpos exists to close that gap.
+                </p>
+            </div>
+            <div class="stat-cluster">
+                <div class="stat-card reveal-stat" style="--sd:0s">
+                    <div class="stat-icon">🤝</div>
+                    <p class="stat-label">Volunteer Matching</p>
+                    <p class="stat-desc">Connecting people to causes that align with their skills and passion</p>
+                </div>
+                <div class="stat-card reveal-stat" style="--sd:0.14s">
+                    <div class="stat-icon">🏛️</div>
+                    <p class="stat-label">NGO Discovery</p>
+                    <p class="stat-desc">Browse verified organizations working on real community problems</p>
+                </div>
+                <div class="stat-card reveal-stat" style="--sd:0.28s">
+                    <div class="stat-icon">🌍</div>
+                    <p class="stat-label">Local Impact</p>
+                    <p class="stat-desc">Find opportunities in your own city and make a difference nearby</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="ovsection reveal">
+            <div class="text">
+                <h2 class="overview">Why We Built Purpos</h2>
+                <p class="overviewc">
+                    Many volunteers want to make a difference but often don't know where to begin. Finding trustworthy
+                    organizations, discovering opportunities that match personal interests, or identifying causes nearby
+                    can be difficult and time-consuming.
+                    <br><br>
+                    At the same time, NGOs often struggle to reach the right people, manage volunteer responses, and
+                    maintain long-term engagement.
+                    <br><br>
+                    Purpos was designed to solve both problems through one seamless platform.
+                </p>
+            </div>
+            <div class="pillars">
+                <div class="pillar reveal-stat" style="--sd:0s">
+                    <div class="pillar-icon">🤝</div>
+                    <h3>Connect</h3>
+                    <p>Match volunteers with NGOs based on skills and location</p>
+                </div>
+                <div class="pillar reveal-stat" style="--sd:0.15s">
+                    <div class="pillar-icon">🌱</div>
+                    <h3>Grow</h3>
+                    <p>Build lasting impact through sustained community engagement</p>
+                </div>
+                <div class="pillar reveal-stat" style="--sd:0.3s">
+                    <div class="pillar-icon">💡</div>
+                    <h3>Empower</h3>
+                    <p>Give people the tools to turn purpose into action</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="ausection motto-section reveal">
+            <div class="text">
+                <h2 class="motto">Built for Volunteers. Powered by Purpose.</h2>
+                <div class="motto-line"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="display:none;"></footer>
+    <script src="script.js"></script>
+    <script src="theme.js"></script>
+    <script src="animations.js"></script>
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    el.querySelectorAll('.reveal-stat').forEach((s, i) => {
+                        setTimeout(() => s.classList.add('stat-visible'), i * 140);
+                    });
+                    statObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('.stat-cluster, .pillars').forEach(el => statObserver.observe(el));
+    </script>
+</body>
+</html>

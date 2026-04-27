@@ -1,0 +1,154 @@
+@font-face { font-family: "titlefont"; src: url("lemonmilk_regular.otf"); }
+@font-face { font-family: "bodyfont";  src: url("piscolabis_regular.ttf"); }
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ===== THEME BUTTON ===== */
+.theme-btn {
+    width: 44px; height: 44px;
+    border: none !important; outline: none !important; border-radius: 50%; padding: 0;
+    background: none !important; background-color: transparent !important; cursor: pointer;
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    transition: transform 0.35s ease; -webkit-appearance: none; appearance: none; box-shadow: none !important;
+}
+.theme-btn:focus, .theme-btn:active, .theme-btn:focus-visible { outline: none !important; box-shadow: none !important; border: none !important; }
+.theme-btn:hover { transform: rotate(20deg) scale(1.12); }
+.theme-icon { width: 44px; height: 44px; border-radius: 50%; display: block; object-fit: cover; pointer-events: none; }
+
+/* ===== PAGE ===== */
+body {
+    margin: 0;
+    background: rgb(231,222,205);
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+}
+
+.topbar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 20px 0;
+    flex-shrink: 0;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 20px 40px;
+}
+
+/* ===== LOGIN POPUP ===== */
+.loginpopup {
+    background: rgb(81,118,100);
+    padding: 52px 48px;
+    border-radius: 28px;
+    text-align: center;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 24px 64px rgba(81,118,100,0.35);
+    animation: popUp 0.5s cubic-bezier(0.16,1,0.3,1) both;
+}
+@keyframes popUp {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+.loginpopup h2 {
+    margin: 0 0 12px;
+    font-family: "titlefont";
+    color: rgb(231,222,205);
+    font-size: 46px;
+    letter-spacing: 2px;
+    line-height: 1.1;
+}
+.loginpopup p {
+    margin: 0 0 32px;
+    font-family: "bodyfont";
+    font-size: 18px;
+    color: rgba(231,222,205,0.85);
+    line-height: 1.5;
+}
+
+.buttonsection {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Main buttons */
+#googlelogin, #phonelogin {
+    width: 100%;
+    padding: 16px;
+    border-radius: 32px;
+    border: none;
+    color: rgb(81,118,100);
+    background: rgb(231,222,205);
+    font-size: 18px;
+    font-family: "bodyfont";
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+}
+#googlelogin:hover, #phonelogin:hover { opacity: 0.9; transform: translateY(-2px); }
+#googlelogin:active, #phonelogin:active { transform: scale(0.98); }
+
+/* Phone / OTP sections */
+#phonesection, #otpsection {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+#phonesection input, #otpsection input {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 16px;
+    border: none;
+    font-family: "bodyfont";
+    font-size: 17px;
+    color: rgb(81,118,100);
+    background: rgb(231,222,205);
+    transition: opacity 0.2s;
+}
+#phonesection input::placeholder, #otpsection input::placeholder {
+    opacity: 0.55;
+}
+#sendOtpButton, #verifyotp {
+    width: 100%;
+    padding: 14px;
+    border-radius: 32px;
+    border: none;
+    background: rgba(231,222,205,0.85);
+    color: rgb(81,118,100);
+    font-family: "bodyfont";
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+}
+#sendOtpButton:hover, #verifyotp:hover { opacity: 0.9; transform: translateY(-2px); }
+
+/* ===== MOBILE ===== */
+@media (max-width: 520px) {
+    .container { padding: 16px 14px 32px; align-items: flex-start; padding-top: 24px; }
+    .loginpopup {
+        padding: 40px 24px;
+        border-radius: 24px;
+        max-width: 100%;
+    }
+    .loginpopup h2 { font-size: 36px; }
+    .loginpopup p { font-size: 16px; margin-bottom: 26px; }
+    #googlelogin, #phonelogin { font-size: 16px; padding: 14px; }
+    #phonesection input, #otpsection input { font-size: 16px; padding: 13px 16px; }
+    #sendOtpButton, #verifyotp { font-size: 16px; padding: 13px; }
+}
+
+/* ===== DARK MODE ===== */
+body.darkmode { background: rgb(30,39,46); }
+body.darkmode .loginpopup { background: rgb(231,222,205); }
+body.darkmode .loginpopup h2, body.darkmode .loginpopup p { color: rgb(81,118,100); }
+body.darkmode .loginpopup p { color: rgba(81,118,100,0.8); }
+body.darkmode #googlelogin, body.darkmode #phonelogin { color: rgb(231,222,205); background: rgb(81,118,100); }
+body.darkmode #phonesection input, body.darkmode #otpsection input { background: rgb(81,118,100); color: rgb(231,222,205); }
+body.darkmode #sendOtpButton, body.darkmode #verifyotp { background: rgb(81,118,100); color: rgb(231,222,205); }

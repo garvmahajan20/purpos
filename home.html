@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+    <!-- Sidebar backdrop for mobile -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <header class="navbar">
+        <div class="logo">PURPOS</div>
+
+        <div class="nav-right">
+            <!-- Desktop only nav buttons -->
+            <button class="allngolist desktop-only" id="allngolist">View All NGOs</button>
+            <button class="allngolist desktop-only" id="browseProblemsBtn">Browse Opportunities</button>
+
+            <button id="darkmode" class="theme-btn" type="button">
+                <img src="theme_icon.png" alt="Toggle Theme" class="theme-icon">
+            </button>
+
+            <!-- Profile icon: opens sidebar on ALL screen sizes -->
+            <img id="profileIcon" class="profile-icon" src="" alt="Profile">
+        </div>
+    </header>
+
+    <!-- Mobile-only action bar: always visible on mobile, hidden on desktop -->
+    <div class="mobile-nav-actions" id="mobileNavActions">
+        <button id="mobileAllNgo">View All NGOs</button>
+        <button id="mobileBrowseBtn">Browse Opportunities</button>
+    </div>
+
+    <div class="status-indicator-container">
+        <div class="status-indicator" id="blinker"></div>
+        <span style="font-weight: 600;" id="statusText">CONNECTING...</span>
+    </div>
+
+    <script>
+        const blinker = document.getElementById('blinker');
+        const statusText = document.getElementById('statusText');
+        const RENDER_URL = 'https://ngo-backend-1at7.onrender.com/health';
+
+        let currentState = '';
+        let checkInProgress = false;
+        let pulseInterval = null;
+
+        function pulseIndicator() {
+            blinker.classList.remove('pulse');
+            void blinker.offsetWidth;
+            blinker.classList.add('pulse');
+        }
+
+        function setPulseRate(intervalMs) {
+            if (pulseInterval) clearInterval(pulseInterval);
+            pulseInterval = setInterval(pulseIndicator, intervalMs);
+        }
+
+        function updateStatus(state, pingTime = null) {
+            if (currentState !== state) {
+                blinker.className = 'status-indicator pulse';
+                blinker.classList.add(state);
+                currentState = state;
+                if (state === 'live') statusText.textContent = 'LIVE';
+                if (state === 'awakening') statusText.textContent = 'AWAKENING SERVER';
+                if (state === 'offline') statusText.textContent = 'OFFLINE';
+            }
+            if (state === 'live') {
+                let interval = Math.min(Math.max(pingTime * 1.2, 800), 2000);
+                setPulseRate(interval);
+            } else if (state === 'awakening') {
+                setPulseRate(400);
+            } else {
+                setPulseRate(2000);
+            }
+        }
+
+        function checkConnection() {
+            if (checkInProgress) return;
+            checkInProgress = true;
+            const startTime = performance.now();
+            const coldStartTimer = setTimeout(() => {
+                if (checkInProgress) updateStatus('awakening');
+            }, 2000);
+            fetch(RENDER_URL)
+                .then(response => {
+                    clearTimeout(coldStartTimer);
+                    if (!response.ok) throw new Error('Server returned error');
+                    const pingTime = performance.now() - startTime;
+                    updateStatus('live', pingTime);
+                })
+                .catch(error => {
+                    clearTimeout(coldStartTimer);
+                    updateStatus('offline');
+                    console.error("Backend ping failed:", error);
+                })
+                .finally(() => { checkInProgress = false; });
+        }
+
+        checkConnection();
+        setInterval(checkConnection, 30000);
+    </script>
+
+    <aside id="sidebar" class="sidebar">
+        <h2>Your Details</h2>
+
+        <label>Name</label>
+        <input id="nameField" type="text">
+        <button id="saveNameBtn">Save Name</button>
+
+        <label>Email</label>
+        <input id="emailField" type="text" readonly>
+
+        <label>Phone</label>
+        <input id="phoneField" type="text" readonly>
+
+        <label>Locality</label>
+        <input type="text" id="localityField" readonly>
+
+        <label>Pincode</label>
+        <input type="text" id="pincodeField" readonly>
+
+        <label>Sector</label>
+        <input id="sectorField" type="text" readonly>
+
+        <label>Travelling Range (km)</label>
+        <input type="text" id="travelField" readonly>
+
+        <label>State</label>
+        <input id="stateField" type="text" readonly>
+
+        <label>City</label>
+        <input id="cityField" type="text" readonly>
+
+        <label>Address</label>
+        <input id="addressField" type="text" readonly>
+    </aside>
+
+    <main class="main-content">
+        <h1>Matched Problems</h1>
+        <div id="matchesGrid" class="matches-grid"></div>
+    </main>
+
+    <div id="problemPopup" class="popup-overlay hidden">
+        <div class="popup-card">
+            <span id="closeProblemPopup" class="close-btn">❌</span>
+            <h2 id="popupNgo"></h2>
+            <h3 id="popupTitle"></h3>
+            <p id="popupDesc"></p>
+        </div>
+    </div>
+
+    <script type="module" src="home.js"></script>
+    <script src="theme.js"></script>
+</body>
+</html>

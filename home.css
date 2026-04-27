@@ -1,0 +1,787 @@
+@font-face {
+    font-family: "titlefont";
+    src: url("lemonmilk_regular.otf");
+}
+
+@font-face {
+    font-family: "bodyfont";
+    src: url("piscolabis_regular.ttf");
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+.theme-btn {
+    width: 44px;
+    height: 44px;
+    border: none !important;
+    outline: none !important;
+    border-radius: 50%;
+    padding: 0;
+    background: none !important;
+    background-color: transparent !important;
+    cursor: pointer;
+    overflow: visible;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.35s ease;
+    -webkit-appearance: none;
+    appearance: none;
+    box-shadow: none !important;
+}
+
+.theme-btn:focus,
+.theme-btn:active,
+.theme-btn:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.theme-btn:hover {
+    transform: rotate(20deg) scale(1.12);
+}
+
+.theme-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: block;
+    object-fit: cover;
+    pointer-events: none;
+    border: none !important;
+    outline: none !important;
+}
+
+body {
+    margin: 0;
+    background: rgb(231, 222, 205);
+}
+
+.navbar {
+    height: 76px;
+    padding: 0 40px;
+    background: rgb(81, 118, 100);
+    color: rgb(231, 222, 205);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 500;
+    animation: fadeInDown 0.5s ease both;
+}
+
+@keyframes fadeInDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    font-family: "titlefont";
+    letter-spacing: 3px;
+    color: rgb(231, 222, 205);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.allngolist,
+#browseProblemsBtn {
+    background: transparent;
+    border: 2px solid rgba(231, 222, 205, 0.65);
+    font-family: "bodyfont";
+    color: rgb(231, 222, 205);
+    border-radius: 30px;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 9px 20px;
+    transition: background 0.25s, border-color 0.25s, transform 0.2s;
+}
+
+.allngolist:hover,
+#browseProblemsBtn:hover {
+    background: rgba(231, 222, 205, 0.15);
+    border-color: rgb(231, 222, 205);
+    transform: translateY(-2px);
+}
+
+.allngobutton {
+    display: flex;
+    align-items: center;
+}
+
+.profile-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid rgba(231, 222, 205, 0.7);
+    background-color: rgb(231, 222, 205);
+    transition: border-color 0.25s, transform 0.25s;
+}
+
+.profile-icon:hover {
+    border-color: rgb(231, 222, 205);
+    transform: scale(1.08);
+}
+
+.profile-icon[src=""] {
+    visibility: hidden;
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 76px;
+    right: -340px;
+    width: 310px;
+    height: calc(100vh - 76px);
+    background: rgb(231, 222, 205);
+    box-shadow: -6px 0 30px rgba(0, 0, 0, 0.12);
+    padding: 28px 24px;
+    transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    border-left: 1px solid rgba(81, 118, 100, 0.15);
+}
+
+.sidebar.open {
+    right: 0;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    color: rgb(81, 118, 100);
+    font-family: "titlefont";
+    font-size: 20px;
+}
+
+.sidebar label {
+    display: block;
+    margin-top: 14px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: rgb(81, 118, 100);
+    font-family: "bodyfont";
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sidebar input {
+    width: 100%;
+    padding: 10px 12px;
+    box-sizing: border-box;
+    font-family: "bodyfont";
+    border: 1px solid rgba(81, 118, 100, 0.3);
+    border-radius: 8px;
+    background: white;
+    color: rgb(81, 118, 100);
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.sidebar input:focus {
+    outline: none;
+    border-color: rgb(81, 118, 100);
+}
+
+#saveNameBtn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    background: rgb(81, 118, 100);
+    color: rgb(231, 222, 205);
+    cursor: pointer;
+    font-family: "bodyfont";
+    font-size: 15px;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+#saveNameBtn:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
+.main-content {
+    padding: 36px 40px;
+    color: rgb(81, 118, 100);
+}
+
+.main-content h1 {
+    font-family: "titlefont";
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    animation: fadeUp 0.6s ease both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.status-indicator-container {
+    position: sticky;
+    top: 90px;         
+    left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    width: fit-content;
+    border-radius: 14px;
+    background: #DDD2BD;
+    color: rgb(81, 118, 100);
+    font-family: "bodyfont";
+    font-size: 0.9em;
+
+    z-index: 400;        
+}
+body.darkmode .status-indicator-container{
+        background: rgb(44, 62, 80);
+
+}
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    background-color: #f59e0b;
+    border-radius: 50%;
+    position: relative;
+}
+
+.status-indicator.pulse {
+    animation: glow 0.3s ease-out;
+}
+
+.status-indicator::before,
+.status-indicator::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.status-indicator.pulse::before {
+    width: 100%;
+    height: 100%;
+    animation: quick-pulse 0.3s ease-out;
+}
+
+.status-indicator.pulse::after {
+    width: 150%;
+    height: 150%;
+    animation: quick-pulse 0.3s ease-out;
+}
+
+.status-indicator.live {
+    background-color: #22c55e;
+}
+
+.status-indicator.live::before,
+.status-indicator.live::after {
+    background-color: #22c55e;
+}
+
+.status-indicator.awakening {
+    background-color: #f59e0b;
+}
+
+.status-indicator.awakening::before,
+.status-indicator.awakening::after {
+    background-color: #f59e0b;
+}
+
+.status-indicator.offline {
+    background-color: #dc2626;
+}
+
+.status-indicator.offline::before,
+.status-indicator.offline::after {
+    background-color: #dc2626;
+}
+
+@keyframes glow {
+    0% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+        filter: brightness(1.5);
+    }
+
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+
+@keyframes quick-pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 0;
+    }
+}
+
+.matches-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 28px;
+    align-items: start;
+}
+
+.problem-card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    align-self: start;
+    height: fit-content;
+    animation: cardPop 0.5s ease both;
+}
+
+.problem-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.problem-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.problem-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.problem-card:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.problem-card:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.problem-card:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+@keyframes cardPop {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.problem-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(81, 118, 100, 0.15);
+}
+
+.problem-card.critical {
+    border: 2px solid red;
+    box-shadow: 0 0 14px rgba(255, 0, 0, 0.2);
+}
+
+.problem-card.expanded {
+    border: 2px solid rgb(81, 118, 100);
+    box-shadow: 0 8px 24px rgba(81, 118, 100, 0.2);
+}
+
+.ngo-name {
+    font-family: "titlefont";
+    font-size: 15px;
+    margin-bottom: 8px;
+    color: rgb(81, 118, 100);
+}
+
+.problem-title {
+    font-family: "bodyfont";
+    font-size: 13.5px;
+    margin-bottom: 14px;
+    color: rgb(81, 118, 100);
+    line-height: 1.5;
+}
+
+.problem-desc {
+    font-family: "bodyfont";
+    font-size: 13px;
+    margin-top: 12px;
+    line-height: 1.5;
+    color: rgb(81, 118, 100);
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.apply-btn,
+.more-btn {
+    flex: 1;
+    padding: 9px 0;
+    border: none;
+    cursor: pointer;
+    font-family: "bodyfont";
+    border-radius: 10px;
+    font-size: 13.5px;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.apply-btn {
+    background: rgb(81, 118, 100);
+    color: rgb(231, 222, 205);
+}
+
+.apply-btn:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
+.more-btn {
+    background: transparent;
+    border: 1.5px solid rgb(81, 118, 100);
+    color: rgb(81, 118, 100);
+}
+
+.more-btn:hover {
+    background: rgba(81, 118, 100, 0.07);
+    transform: translateY(-1px);
+}
+
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.popup-card {
+    background: rgb(231, 222, 205);
+    width: min(90vw, 520px);
+    padding: 36px 28px;
+    border-radius: 22px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    animation: popUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes popUp {
+    from {
+        transform: scale(0.92) translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.popup-card .close-btn {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    cursor: pointer;
+    font-size: 22px;
+    color: rgb(81, 118, 100);
+    transition: transform 0.2s;
+}
+
+.popup-card .close-btn:hover {
+    transform: scale(1.2);
+}
+
+#popupNgo {
+    margin: 24px 0 10px;
+    font-family: "titlefont";
+    font-size: 26px;
+    color: rgb(81, 118, 100);
+    text-transform: lowercase;
+}
+
+#popupTitle {
+    margin: 10px 0 14px;
+    font-family: "bodyfont";
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(81, 118, 100);
+}
+
+#popupDesc {
+    font-family: "bodyfont";
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgb(81, 118, 100);
+}
+
+.hidden {
+    display: none !important;
+}
+
+body.darkmode {
+    background: rgb(30, 39, 46);
+    color: rgb(231, 222, 205);
+}
+
+body.darkmode .navbar {
+    background: rgb(81, 118, 100);
+}
+
+body.darkmode .logo {
+    color: rgb(231, 222, 205);
+}
+
+body.darkmode .allngolist,
+body.darkmode #browseProblemsBtn {
+    border-color: rgba(231, 222, 205, 0.5);
+    color: rgb(231, 222, 205);
+}
+
+body.darkmode .allngolist:hover,
+body.darkmode #browseProblemsBtn:hover {
+    background: rgba(231, 222, 205, 0.1);
+}
+
+body.darkmode .main-content {
+    color: rgb(231, 222, 205);
+}
+
+body.darkmode .sidebar {
+    background: rgb(44, 62, 80);
+    border-color: rgba(231, 222, 205, 0.1);
+}
+
+body.darkmode .sidebar h2,
+body.darkmode .sidebar label {
+    color: rgb(231, 222, 205);
+}
+
+body.darkmode .sidebar input {
+    background: rgb(52, 73, 94);
+    border-color: rgba(231, 222, 205, 0.2);
+    color: rgb(231, 222, 205);
+}
+
+body.darkmode #saveNameBtn {
+    background: rgb(231, 222, 205);
+    color: rgb(81, 118, 100);
+}
+
+body.darkmode .problem-card {
+    background: rgb(44, 62, 80);
+    color: rgb(231, 222, 205);
+}
+
+body.darkmode .ngo-name,
+body.darkmode .problem-title,
+body.darkmode .problem-desc {
+    color: rgb(231, 222, 205);
+}
+
+body.darkmode .more-btn {
+    border-color: rgba(231, 222, 205, 0.5);
+    color: rgb(231, 222, 205);
+}
+
+body.darkmode .apply-btn {
+    background: rgb(231, 222, 205);
+    color: rgb(81, 118, 100);
+}
+
+body.darkmode .popup-card {
+    background: rgb(44, 62, 80);
+}
+
+body.darkmode .popup-card .close-btn,
+body.darkmode #popupNgo,
+body.darkmode #popupTitle,
+body.darkmode #popupDesc {
+    color: rgb(231, 222, 205);
+}
+/* ================= MOBILE RESPONSIVE ================= */
+
+/* Desktop only: show nav buttons in navbar */
+.desktop-only { display: flex; }
+
+/* Mobile nav action bar: hidden on desktop */
+.mobile-nav-actions { display: none; }
+
+/* Sidebar backdrop: hidden until active */
+.sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 490;
+}
+.sidebar-backdrop.active { display: block; }
+.sidebar { z-index: 495; }
+
+@media (max-width: 768px) {
+    /* Navbar */
+    .navbar { padding: 0 16px; height: 64px; }
+    .logo { font-size: 20px; }
+
+    /* Hide desktop nav buttons from navbar */
+    .desktop-only { display: none !important; }
+
+    /* Show mobile action bar below navbar */
+    .mobile-nav-actions {
+        display: flex;
+        gap: 10px;
+        padding: 10px 14px;
+        background: rgb(231, 222, 205);
+        border-bottom: 1px solid rgba(81, 118, 100, 0.12);
+        position: sticky;
+        top: 64px;
+        z-index: 450;
+    }
+    .mobile-nav-actions button {
+        flex: 1;
+        padding: 10px 8px;
+        border-radius: 22px;
+        border: 2px solid rgb(81, 118, 100);
+        background: transparent;
+        color: rgb(81, 118, 100);
+        font-family: "bodyfont";
+        font-size: 13px;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+    }
+    .mobile-nav-actions button:active {
+        background: rgb(81, 118, 100);
+        color: rgb(231, 222, 205);
+    }
+
+    /* Status indicator */
+    .status-indicator-container {
+        top: auto;
+        position: relative;
+        left: 0;
+        margin: 10px 14px 0;
+        width: fit-content;
+        font-size: 0.8em;
+        padding: 6px 14px;
+    }
+
+    /* Main content */
+    .main-content { padding: 16px 14px; }
+    .main-content h1 { font-size: 1.3rem; margin-bottom: 8px; }
+
+    /* Grid: single column */
+    .matches-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-top: 14px;
+    }
+
+    /* Cards */
+    .problem-card { padding: 16px; border-radius: 14px; }
+    .ngo-name { font-size: 14px; }
+    .problem-title { font-size: 13px; }
+
+    .card-buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        margin-top: 14px;
+    }
+    .apply-btn, .more-btn {
+        flex: 1;
+        padding: 11px 6px;
+        font-size: 13px;
+        border-radius: 10px;
+        min-width: 0;
+    }
+
+    /* Sidebar: slide in from right, full-height */
+    .sidebar {
+        width: 85%;
+        max-width: 300px;
+        top: 64px;
+        height: calc(100vh - 64px);
+        right: -100%;
+    }
+    .sidebar.open { right: 0; }
+
+    /* Popup */
+    .popup-card { width: 92vw; padding: 24px 16px; }
+    #popupNgo { font-size: 20px; }
+    #popupTitle { font-size: 15px; }
+    #popupDesc { font-size: 13px; }
+}
+
+/* Dark mode mobile nav */
+body.darkmode .mobile-nav-actions {
+    background: rgb(30, 39, 46);
+    border-color: rgba(231, 222, 205, 0.1);
+}
+body.darkmode .mobile-nav-actions button {
+    border-color: rgba(231, 222, 205, 0.6);
+    color: rgb(231, 222, 205);
+}
+body.darkmode .mobile-nav-actions button:active {
+    background: rgba(231, 222, 205, 0.15);
+}

@@ -1,0 +1,195 @@
+@font-face { font-family: "titlefont"; src: url("lemonmilk_regular.otf"); }
+@font-face { font-family: "bodyfont";  src: url("piscolabis_regular.ttf"); }
+*, *::before, *::after { box-sizing: border-box; }
+
+.theme-btn {
+    width: 44px; height: 44px; border: none !important; outline: none !important;
+    border-radius: 50%; padding: 0; background: none !important; background-color: transparent !important; cursor: pointer;
+    overflow: visible; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    transition: transform 0.35s ease; -webkit-appearance: none; appearance: none; box-shadow: none !important;
+}
+.theme-btn:focus, .theme-btn:active, .theme-btn:focus-visible { outline: none !important; box-shadow: none !important; border: none !important; }
+.theme-btn:hover { transform: rotate(20deg) scale(1.12); }
+.theme-icon { width: 44px; height: 44px; border-radius: 50%; display: block; object-fit: cover; pointer-events: none; border: none !important; outline: none !important; }
+
+body { margin: 0; background: rgb(231,222,205); min-height: 100vh; overflow-y: auto; }
+#stepIndicator { color: rgb(231,222,205); }
+.topbar { display: flex; justify-content: flex-end; padding: 18px 24px 0; }
+.container {
+    box-sizing: border-box;
+    display: flex; justify-content: center; align-items: center;
+    min-height: calc(100vh - 70px); padding: 24px 20px;
+}
+.registrationpopup {
+    padding: 44px 40px; background: rgb(81,118,100);
+    border-radius: 24px; text-align: center; width: 380px; max-width: 100%;
+    box-shadow: 0 20px 60px rgba(81,118,100,0.3);
+    animation: popUp 0.5s cubic-bezier(0.16,1,0.3,1) both;
+}
+@keyframes popUp {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+.registrationpopup h2 {
+    margin-bottom: 6px; font-family: "titlefont";
+    color: rgb(231,222,205); font-size: 22px; letter-spacing: 1px;
+}
+.registrationpopup form { display: flex; flex-direction: column; gap: 0; }
+#step1, #step2 { display: flex; flex-direction: column; gap: 12px; transition: all 0.3s ease; }
+
+.registrationpopup label {
+    color: rgba(231,222,205,0.85); font-family: "bodyfont";
+    font-size: 12px; text-align: left; text-transform: uppercase; letter-spacing: 0.5px;
+    margin-top: 4px;
+}
+.registrationpopup input, .registrationpopup select {
+    font-family: "bodyfont"; width: 100%; padding: 11px 14px;
+    border: none; border-radius: 10px; font-size: 14px;
+    color: rgb(81,118,100); background: rgb(231,222,205);
+    display: block; transition: opacity 0.2s;
+}
+.registrationpopup input:focus, .registrationpopup select:focus {
+    outline: none; opacity: 0.9;
+}
+.registrationpopup input[readonly] { opacity: 0.65; cursor: default; }
+
+#nextBtn, #backBtn, button[type="submit"] {
+    padding: 13px; border-radius: 30px; border: none;
+    cursor: pointer; font-family: "bodyfont"; width: 100%; margin-top: 8px;
+    font-size: 16px; transition: transform 0.2s, opacity 0.2s;
+}
+#nextBtn, button[type="submit"] {
+    background: rgb(231,222,205); color: rgb(81,118,100);
+}
+#nextBtn:hover, button[type="submit"]:hover { opacity: 0.9; transform: translateY(-2px); }
+#backBtn {
+    background: transparent;
+    border: 2px solid rgba(231,222,205,0.6); color: rgb(231,222,205);
+}
+#backBtn:hover { background: rgba(231,222,205,0.1); transform: translateY(-2px); }
+
+
+body.darkmode { background: rgb(30,39,46); }
+body.darkmode .registrationpopup { background: rgb(231,222,205); }
+body.darkmode .registrationpopup h2,
+body.darkmode .registrationpopup label,
+body.darkmode #stepIndicator { color: rgb(81,118,100) !important; }
+body.darkmode .registrationpopup input,
+body.darkmode .registrationpopup select {
+    color: rgb(30,39,46);
+    background: white;
+}
+body.darkmode #nextBtn, body.darkmode button[type="submit"] {
+    background: rgb(81,118,100); color: rgb(231,222,205);
+}
+body.darkmode #backBtn { border-color: rgb(81,118,100); color: rgb(81,118,100); }
+
+
+body {
+    background: rgb(231,222,205);
+    background-image: radial-gradient(
+        ellipse at 30% 70%,
+        rgba(81,118,100,0.08) 0%,
+        transparent 55%
+    ), radial-gradient(
+        ellipse at 80% 20%,
+        rgba(81,118,100,0.05) 0%,
+        transparent 50%
+    );
+}
+
+
+.registrationpopup input:focus,
+.registrationpopup select:focus {
+    outline: none;
+    opacity: 1;
+    box-shadow: 0 0 0 3px rgba(231,222,205,0.35);
+    transform: scale(1.01);
+    transition: box-shadow 0.25s, transform 0.25s;
+}
+
+.registrationpopup label {
+    transition: color 0.25s, letter-spacing 0.25s;
+}
+.registrationpopup input:focus + label,
+.registrationpopup select:focus + label {
+    letter-spacing: 1.5px;
+}
+
+#step1, #step2 {
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+#step2[style*="none"] {
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+#nextBtn {
+    position: relative;
+    overflow: hidden;
+}
+#nextBtn::after {
+    content: '→';
+    position: absolute;
+    right: -20px;
+    top: 50%; transform: translateY(-50%);
+    transition: right 0.3s ease, opacity 0.3s;
+    opacity: 0;
+    font-size: 18px;
+}
+#nextBtn:hover::after {
+    right: 18px;
+    opacity: 1;
+}
+#nextBtn:hover { padding-right: 40px; }
+#nextBtn { transition: transform 0.2s, opacity 0.2s, padding-right 0.3s; }
+
+button[type="submit"] {
+    position: relative;
+    overflow: hidden;
+}
+button[type="submit"]::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    opacity: 0;
+    transform: scale(0);
+    border-radius: inherit;
+    transition: transform 0.5s ease, opacity 0.5s;
+}
+button[type="submit"]:active::before {
+    opacity: 1;
+    transform: scale(2);
+}
+
+.registrationpopup {
+    animation: springIn 0.65s cubic-bezier(0.16,1,0.3,1) both;
+}
+@keyframes springIn {
+    0%   { opacity: 0; transform: translateY(40px) scale(0.92) rotate(-1deg); }
+    70%  { transform: translateY(-6px) scale(1.01) rotate(0.3deg); }
+    100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+}
+
+.registrationpopup input:valid:not(:placeholder-shown) {
+    border-left: 3px solid rgba(231,222,205,0.6);
+    padding-left: 11px;
+    transition: border-left 0.3s;
+}
+
+
+/* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 480px) {
+    .container {
+        padding: 14px;
+        align-items: flex-start;
+        padding-top: 16px;
+    }
+    .registrationpopup {
+        width: 100%;
+        padding: 28px 18px;
+        border-radius: 18px;
+    }
+    .registrationpopup h2 { font-size: 1.5rem; }
+}

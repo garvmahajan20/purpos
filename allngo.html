@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All NGOs — PURPOS</title>
+    <link rel="stylesheet" href="allngo.css?v=2">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">PURPOS</div>
+        <div class="nav-right">
+            <button id="darkmode" class="theme-btn" type="button">
+                <img src="theme_icon.png" alt="Toggle Theme" class="theme-icon">
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <h1>NGO's</h1>
+        <p class="subtitle">List of NGOs on the platform</p>
+        <div id="ngogrids" class="ngo-list"></div>
+    </main>
+
+    <!-- NGO detail popup -->
+    <div id="popupOverlay" class="popup-overlay hidden">
+        <div class="popup-card">
+            <button id="closePopup" class="close-btn" type="button">❌</button>
+            <img src="" alt="NGO image" id="popupImage">
+            <h2 id="popupName"></h2>
+            <span id="popupSectorBadge" class="sector-badge"></span>
+            <div class="popup-details">
+                <p id="popupLocality"></p>
+                <p id="popupCity"></p>
+                <p id="popupState"></p>
+                <p id="popupPurpose"></p>
+            </div>
+            <div id="galleryContainer" class="gallery-container"></div>
+        </div>
+    </div>
+
+    <!-- Full-screen image viewer -->
+    <div id="imageViewer" class="image-viewer hidden">
+        <button id="closeViewer" class="viewer-close" type="button">❌</button>
+        <img id="viewerImage">
+    </div>
+
+    <script src="animations.js"></script>
+    <script type="module" src="allngo.js"></script>
+    <script src="theme.js"></script>
+</body>
+</html>

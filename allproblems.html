@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Opportunities</title>
+
+
+    <link rel="stylesheet" href="allproblems.css">
+</head>
+
+<body>
+
+
+    <header class="navbar">
+        <div class="logo">PURPOS</div>
+
+        <div class="nav-right">
+            <button id="darkmode" class="theme-btn" type="button"><img src="theme_icon.png" alt="Toggle Theme" class="theme-icon"></button>
+        </div>
+    </header>
+
+
+    <main class="main-content">
+        <h1>Browse Opportunities</h1>
+
+
+        <div id="allProblemsGrid" class="matches-grid"></div>
+    </main>
+
+
+    <div id="problemPopup" class="popup-overlay hidden">
+        <div class="popup-card">
+            <span id="closeProblemPopup" class="close-btn">❌</span>
+
+            <h2 id="popupNgo"></h2>
+
+
+            <p id="popupSector"></p>
+
+            <h3 id="popupTitle"></h3>
+            <p id="popupDesc"></p>
+        </div>
+    </div>
+
+
+    <script type="module" src="allproblems.js"></script>
+    <script src="theme.js"></script>
+
+<script src="animations.js"></script>
+</body>
+</html>

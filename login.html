@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <div class="topbar">
+        <button id="darkmode" class="theme-btn" type="button"><img src="theme_icon.png" alt="Toggle Theme" class="theme-icon"></button>
+    </div>
+    <div class="container">
+        <div class="loginpopup">
+            <h2>Welcome Back 🐾</h2>
+            <p>Sign in to continue making a difference</p>
+            <div class="buttonsection">
+                <button id="googlelogin">Sign in with Google</button>
+                <button id="phonelogin">Sign in with phone number</button>
+                <div id="phonesection" style="display: none;">
+                    <input type="text" id="phoneNumber" placeholder="+91 XXXXXXXXXX">
+                    <button id="sendOtpButton">Send OTP</button>
+                </div>
+                <div id="otpsection" style="display: none;">
+                    <input type="text" id="otp" placeholder="Enter OTP">
+                    <button id="verifyotp">Verify</button>
+                </div>
+            </div>
+        </div>
+        <div id="recaptcha"></div>
+    </div>
+
+    <script type="module" src="login.js"></script>
+    <script src="theme.js"></script>
+</body>
+
+</html>
