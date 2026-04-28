@@ -93,6 +93,25 @@ onAuthStateChanged(auth, async (user) => {
 
     await sendDataToAPI(data);
 });
+saveNameBtn.addEventListener("click", async () => {
+    const newName = document.getElementById("nameField").value.trim();
+
+    if (!newName) {
+        alert("Name cannot be empty.");
+        return;
+    }
+
+    try {
+        const docRef = doc(db, "volunteers", profileId);
+        await setDoc(docRef, { name: newName }, { merge: true });
+
+        volunteerDataGlobal.name = newName;
+        alert("Name updated successfully!");
+    } catch (error) {
+        console.error("❌ Failed to update name:", error);
+        alert("Failed to update name. Please try again.");
+    }
+});
 
 /* ================= FETCH POSTS ================= */
 
@@ -204,7 +223,8 @@ async function processMatches(apiData) {
 
         const postsQ = query(
             collection(friendDB, "posts"),
-            where("NGOid", "==", post.ngo_id)
+            where("NGOid", "==", post.ngo_id),
+            where("time", "==", post.post_id)
         );
 
         const postsSnap = await getDocs(postsQ);
